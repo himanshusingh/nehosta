@@ -13,14 +13,16 @@ class User < ActiveRecord::Base
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
     	if signed_in_resource && (signed_in_resource.email == auth.info.email)
-    		user.provider = auth.provider
-    		user.uid = auth.uid
-    		user.fb_url = auth.extra.raw_info.link
-    		user.sex = auth.extra.raw_info.gender if user.sex.nil?
-    		user.first_name = auth.info.first_name if user.first_name.nil?
-    		user.last_name = auth.info.last_name if user.last_name.nil?
-    		user.location = auth.info.location if user.location.nil?
-    		user.birthday = Date.strptime(auth.extra.raw_info.birthday,'%m/%d/%Y') if user.birthday.nil?
+    		signed_in_resource.provider = auth.provider
+    		signed_in_resource.uid = auth.uid
+    		signed_in_resource.fb_url = auth.extra.raw_info.link
+    		signed_in_resource.sex = auth.extra.raw_info.gender if signed_in_resource.sex.nil?
+    		signed_in_resource.first_name = auth.info.first_name if signed_in_resource.first_name.nil?
+    		signed_in_resource.last_name = auth.info.last_name if signed_in_resource.last_name.nil?
+    		signed_in_resource.location = auth.info.location if signed_in_resource.location.nil?
+    		signed_in_resource.birthday = Date.strptime(auth.extra.raw_info.birthday,'%m/%d/%Y') if signed_in_resource.birthday.nil?
+    		signed_in_resource.save!
+    		return signed_in_resource
     	else 
     		user = User.create(provider:auth.provider,
                            uid:auth.uid,
