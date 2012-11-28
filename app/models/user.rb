@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-    	if signed_in_resource && (signed_in_resource.email == auth.info.email)
+    	if signed_in_resource
     		signed_in_resource.provider = auth.provider
     		signed_in_resource.uid = auth.uid
     		signed_in_resource.fb_url = auth.extra.raw_info.link
@@ -30,7 +30,19 @@ class User < ActiveRecord::Base
     		signed_in_resource.birthday = Date.strptime(auth.extra.raw_info.birthday,'%m/%d/%Y') if signed_in_resource.birthday.nil?
     		signed_in_resource.save!
     		return signed_in_resource
-    	else 
+    	elsif User.find_by_email(auth.info.email)
+        user = User.find_by_email(auth.info.email)
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.fb_url = auth.extra.raw_info.link
+        user.sex = auth.extra.raw_info.gender if user.sex.nil?
+        user.first_name = auth.info.first_name if user.first_name.nil?
+        user.last_name = auth.info.last_name if user.last_name.nil?
+        user.location = auth.info.location if user.location.nil?
+        user.birthday = Date.strptime(auth.extra.raw_info.birthday,'%m/%d/%Y') if user.birthday.nil?
+        user.save!
+        return user
+      else
     		user = User.create(provider:auth.provider,
                            uid:auth.uid,
                            email:auth.info.email,
