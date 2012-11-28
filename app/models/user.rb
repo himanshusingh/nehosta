@@ -7,7 +7,14 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :birthday, :description, :fb_url, :first_name, :last_name, :location, :provider, :sex, :uid
+  attr_accessible :birthday, :description, :fb_url, :first_name, :last_name, :location, :provider, :sex, :uid, :avatar
+
+  # Validations
+  validates_attachment_size :avatar, less_than: 1.megabytes
+  validates_attachment_content_type :avatar, content_type: ['image/jpeg', 'image/png']
+
+  # Avatar
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first

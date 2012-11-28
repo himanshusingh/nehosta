@@ -20,8 +20,14 @@ group :assets do
 end
 
 gem 'jquery-rails', '2.0.2'
+
+# Authentication gems
 gem 'omniauth-facebook', '1.4.0'
 gem 'devise', '2.1.2'
+
+# Photos
+gem 'paperclip', '3.3.1'
+
 group :production do
  # gem 'pg', '0.12.2'
 end

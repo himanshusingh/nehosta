@@ -2,6 +2,7 @@ Trytry::Application.routes.draw do
   match '/auth/:provider/callback', to: 'authentications#create'
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   root to: 'home#index'
+  resources :users, only: [:show, :edit, :update]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

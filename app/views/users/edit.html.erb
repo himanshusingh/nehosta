@@ -1,0 +1,28 @@
+<% provide(:title, "Edit user") %> 
+<h1>Update your profile</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+
+      <%= f.label :birthday %>
+      <%= f.date_select(:birthday, start_year: 1900, end_year: Time.now.year) %>
+
+      <%= f.label :sex %>
+      <%= f.select(:sex, [['male',1],['female',2]]) %>
+
+      <%= f.label :location %>
+      <%= f.text_field :location %>
+
+      <%= f.label :avatar, "Photo" %>
+      <%= f.file_field :avatar %>
+
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
