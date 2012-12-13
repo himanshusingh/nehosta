@@ -1,3 +1,35 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  first_name             :string(255)
+#  last_name              :string(255)
+#  description            :text
+#  location               :string(255)
+#  birthday               :date
+#  sex                    :string(255)
+#  provider               :string(255)
+#  uid                    :string(255)
+#  fb_url                 :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0)
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  avatar_file_name       :string(255)
+#  avatar_content_type    :string(255)
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
+#
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -12,9 +44,13 @@ class User < ActiveRecord::Base
   # Validations
   validates_attachment_size :avatar, less_than: 1.megabytes
   validates_attachment_content_type :avatar, content_type: ['image/jpeg', 'image/png']
+  validates :last_name, presence: true
+  validates :sex, presence: true
 
   # Avatar
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
+
+  has_many :spaces, dependent: :destroy
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first

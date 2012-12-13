@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128023912) do
+ActiveRecord::Schema.define(:version => 20121204091006) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -20,6 +20,38 @@ ActiveRecord::Schema.define(:version => 20121128023912) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "photos", :force => true do |t|
+    t.string   "caption",              :default => ""
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+  end
+
+  create_table "spaces", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.text     "rules"
+    t.string   "street_address"
+    t.string   "locality"
+    t.string   "city"
+    t.string   "country"
+    t.integer  "pincode"
+    t.integer  "capacity"
+    t.integer  "bedrooms"
+    t.integer  "bathrooms"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.float    "price"
+    t.string   "room_type"
+  end
+
+  add_index "spaces", ["city"], :name => "index_spaces_on_city"
+  add_index "spaces", ["user_id"], :name => "index_spaces_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
