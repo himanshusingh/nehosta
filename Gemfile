@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '1.9.3'
 gem 'rails', '3.2.9'
 
 gem 'bootstrap-sass', '2.2.1.1'
@@ -36,7 +36,8 @@ gem 'devise', '2.1.2'
 gem 'paperclip', '3.3.1'
 
 group :production do
- # gem 'pg', '0.12.2'
+  gem 'pg'
+  gem 'thin'
 end
 
 group :test do
