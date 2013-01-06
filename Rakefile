@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Trytry::Application.load_tasks
+Nehosta::Application.load_tasks

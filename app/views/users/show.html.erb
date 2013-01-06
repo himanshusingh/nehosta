@@ -1,7 +1,51 @@
-<p>
-	<%= image_tag @user.avatar.url(:thumb) %>
-	<br/>
-	<%= @user.first_name %>
-	<%= @user.location %>
-	<%= @user.birthday %>
-</p>
+<% provide(:title, 'Profile') %>
+
+<div class="row-fluid">
+	<aside class="span3">
+		<section id="user-profile-pic">
+			<div class="thumbnail">
+				<%= image_tag(@user.avatar.url) %>
+				<% if current_user == @user %>
+					<a href="#photoModal"  data-toggle="modal" data-placement="left" title="Change photo">
+						<i class="icon-edit"></i>
+					</a>
+
+					<%= link_to(raw('<i class="icon-remove"></i>'), { action: 'delete_photo', id: @user.id }, method: :delete, data: { confirm: 'Do you want to remove this photo?', placement: 'right' }, rel: 'tooltip', title: 'Remove this photo') %>
+				<% end %>
+			  	<div class="caption">
+			    <h4><%=@user.first_name%></h4>
+			    <p><%=@user.location%></p>
+			  </div>
+			</div>
+		</section>
+	</aside>
+	<div class="span9">
+		<% if @user.spaces.any? %>
+			<ul>
+				<% @user.spaces.each do |space| %>
+					<li><%= link_to space.name, space %></li>
+				<% end %>
+			</ul>
+		<% end %>
+	</div>
+
+
+
+	 
+	<!-- Photo Modal -->
+	<div id="photoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+	  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h4 id="photoModalLabel">Select an image to upload below</h4>
+	  </div>
+	  	<div class="modal-body">
+	  		<%= simple_form_for(@user) do  |f| %>
+	  			<%= f.input :avatar, label: "Photo:" %>
+	  	</div>
+	    <div class="modal-footer">
+	      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	      <%= f.submit 'Save Changes', class: 'btn btn-primary' %>
+	    </div>
+	  <% end %>
+	</div>
+</div>

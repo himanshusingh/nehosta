@@ -1,0 +1,115 @@
+<section id="show-space">
+	<div class="gen-section-heading">
+		<% if @space.user == current_user %><%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_space_path(@space), class: 'btn btn-inverse', style: 'float:right' %><%end%>
+		<h4><%= @space.name %></h4>
+		<small> <%= @space.room_type %> in <strong><%= @space.location %></strong></small>
+	</div>
+	<div class="gen-section-body">
+		<div class="row-fluid">
+			<div class="span9">
+				<div id="spacePhotosCarousel" class="carousel slide">
+				 	<div class="carousel-inner">
+				 		<% if @space.photos.any? %>
+				 			<% @space.photos.each_with_index do |photo, idx|%>
+				 			<% unless photo.new_record? %>
+				 			<% if idx == 0 %>
+				 			<div class="item active">
+				 				<%= image_tag(photo.picture.url(:gallery)) %>
+				 				<div class="carousel-caption">
+				 					<p><%= best_in_place(photo, :caption, path: '/spaces/'+@space.id.to_s+'/photos/'+photo.id.to_s) %></p>
+				 				</div>
+				 			</div>
+				 			<% else %>
+				 			<div class="item">
+				 				<%= image_tag(photo.picture.url(:gallery)) %>
+				 				<div class="carousel-caption">
+				 					<p><%= photo.caption %></p>
+				 				</div>
+				 			</div>
+				 			<% end %>
+				 			<% end %>
+				 			<% end %>
+				 		<% end %>
+				 	</div>
+				 	<a class="left carousel-control" href="#spacePhotosCarousel" data-slide="prev" style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">&lsaquo;</a>
+				 	<a class="right carousel-control" href="#spacePhotosCarousel" data-slide="next" style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">&rsaquo;</a>
+				</div>
+				<div class="row-fluid">
+					<div class="span6">	
+						<table class="table table-hover table-condensed table-bordered">
+							<tbody>
+							  <tr>
+							    <td><strong>Type:</strong></td>
+							    <td><%= @space.room_type %></td>
+							  </tr>
+							  <tr>
+							    <td><strong>Bedrooms:</strong></td>
+							    <td><%= @space.bedrooms %></td>
+							  </tr>
+							  <tr>
+							    <td><strong>Bathrooms:</strong></td>
+							    <td><%= @space.bathrooms %></td>
+							  </tr>
+							  <tr>
+							    <td><strong>Capacity:</strong></td>
+							    <td><%= @space.capacity %></td>
+							  </tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="span6">
+						<table class="table table-hover table-condensed table-bordered">
+							<tbody>
+								<% amenities = amenities_options %>
+								<% provided = @space.amenities %>
+								<% for i in 0..(amenities.length-1) do %>
+								<% if i%2 == 0 %>
+									<tr>
+										<td><strong><%= amenities[i] %></strong></td>
+										<% if provided && provided.include?(amenities[i]) %>
+								  			<td><i class="icon-ok-sign"></i></td>
+								  		<% else %>
+								  			<td><i class="icon-ban-circle"></i></td>
+								  		<% end %>
+								  		<td><strong><%= amenities[i+1] %></strong></td>
+								  		<% if provided && provided.include?(amenities[i+1]) %>
+								  			<td><i class="icon-ok-sign"></i></td>
+								  		<% else %>
+								  			<td><i class="icon-ban-circle"></i></td>
+								  		<% end %>
+									</tr>
+								<% end %>
+								<% end %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<legend> Description </legend>
+				<p>
+			 		<%= @space.description %>
+			 	</p>
+			 	<% unless @space.rules.blank? %>
+			 	<legend> House Rules </legend>
+			 	<p>
+			 		<%= @space.rules %>
+			 	</p>
+			 	<% end %>
+			</div>
+			<div class="span3">
+				<section id="host-profile">
+					<div class="thumbnail">
+						<%= image_tag(@host.avatar.url) %>
+					  	<div class="caption">
+					    <h4><%= link_to @host.first_name, @host%></h4>
+					    <p><%=@host.location%></p>
+					    <% unless @host.description.blank? %>
+					    <small><strong>About Me:</small></strong>
+					    <p><small><%= truncate @host.description, length: 250 %><%= link_to 'View full profile', @host, id:"more-about" %></small></p>
+					    <% end %>
+					  </div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</section>

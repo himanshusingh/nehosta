@@ -19,6 +19,9 @@
 #  updated_at     :datetime         not null
 #  price          :float
 #  room_type      :string(255)
+#  amenities      :string(255)
+#  size           :float
+#  directions     :text
 #
 
 require 'spec_helper'

@@ -37,20 +37,26 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  has_many :spaces, dependent: :destroy
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :birthday, :description, :fb_url, :first_name, :last_name, :location, :provider, :sex, :uid, :avatar
 
   # Validations
-  validates_attachment_size :avatar, less_than: 1.megabytes
+  validates_attachment_size :avatar, less_than: 5.megabytes
   validates_attachment_content_type :avatar, content_type: ['image/jpeg', 'image/png']
-  validates :last_name, presence: true
+  validates :last_name, presence: true, length: { maximum: 50 }
+  validates :first_name, length: { maximum: 50 }
   validates :sex, presence: true
+  validates :description, length: { maximum: 1250 }
 
   # Avatar
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
-
-  has_many :spaces, dependent: :destroy
+  has_attached_file :avatar, 
+    url: "/:attachment/:id/:style/:basename.:extension",
+    default_url: "/images/missing_:style.jpg",
+    path: ":rails_root/public/:attachment/:id/:style/:basename.:extension",
+    styles: { medium: "260x180#", thumb: "100x100#", small: "40x40#" }
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
@@ -68,6 +74,7 @@ class User < ActiveRecord::Base
     		return signed_in_resource
     	elsif User.find_by_email(auth.info.email)
         user = User.find_by_email(auth.info.email)
+        return user if user.fb_url
         user.provider = auth.provider
         user.uid = auth.uid
         user.fb_url = auth.extra.raw_info.link

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204091006) do
+ActiveRecord::Schema.define(:version => 20130103145305) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20121204091006) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.integer  "space_id"
   end
 
   create_table "spaces", :force => true do |t|
@@ -48,6 +49,11 @@ ActiveRecord::Schema.define(:version => 20121204091006) do
     t.datetime "updated_at",     :null => false
     t.float    "price"
     t.string   "room_type"
+    t.string   "amenities"
+    t.float    "size"
+    t.text     "directions"
+    t.integer  "phone_number"
+    t.text     "full_address"
   end
 
   add_index "spaces", ["city"], :name => "index_spaces_on_city"

@@ -32,6 +32,9 @@ GEM
       rake
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    best_in_place (2.0.2)
+      jquery-rails
+      rails (~> 3.1)
     bootstrap-sass (2.2.1.1)
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.9)
@@ -54,6 +57,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    country_select (1.0.1)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -66,6 +70,9 @@ GEM
     faraday (0.8.4)
       multipart-post (~> 1.1)
     ffi (1.2.0)
+    font-awesome-sass-rails (2.0.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     hashie (1.2.0)
     hike (1.2.1)
     httpauth (0.2.0)
@@ -158,6 +165,9 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
+    simple_form (2.0.4)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     sprockets (2.2.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -185,17 +195,21 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (= 2.5.0)
+  best_in_place (= 2.0.2)
   bootstrap-sass (= 2.2.1.1)
   bootstrap-will_paginate (= 0.0.9)
   capybara (= 1.1.2)
   coffee-rails (= 3.2.2)
+  country_select
   devise (= 2.1.2)
+  font-awesome-sass-rails
   jquery-rails (= 2.0.2)
   omniauth-facebook (= 1.4.0)
   paperclip (= 3.3.1)
   rails (= 3.2.9)
   rspec-rails (= 2.11.0)
   sass-rails (= 3.2.5)
+  simple_form (= 2.0.4)
   sqlite3 (= 1.3.5)
   uglifier (= 1.2.3)
   will_paginate (= 3.0.3)

@@ -1,0 +1,102 @@
+<% provide(:title, 'Add Space') %>
+<div class="tabbable tabs-left">
+
+  <ul class="nav nav-tabs nav-pills">
+    <li class="active"><a href="#lA" data-toggle="tab">Description, Amenities and Rules</a></li>
+    <li><a href="#lB" data-toggle="tab">Details</a></li>
+    <li><a href="#lC" data-toggle="tab">Photos</a></li>
+    <li><a href="#lD" data-toggle="tab">Private Details <i class="icon-lock"></i></a></li>
+    <li><a href="#lE" data-toggle="tab">Advanced Options</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="lA">
+      <div class="gen-section-heading">
+        <h4>Manage your place</h4>
+        <p><small> Add description, amenities you offer and your house rules! </small></p>
+      </div>
+      <div class="gen-section-body">
+        <%= simple_form_for @space, html: { class: "form-horizontal" } do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <%= f.input :name, input_html: { class: "span6" }, hint: "<small class='muted'>What do you call your home?</small>" %>
+          <%= f.input :description, input_html: { class: "span6 ", rows: "12"} %>
+          <%= f.input :amenities, collection: amenities_options, as: :check_boxes %>
+          <%= f.input :rules, label: "House Rules", input_html: { class: "span6", rows: "10"} %>
+          <div class="form-actions">
+            <%= f.submit "Save Changes", class: 'btn btn-custom' %>
+            <%= submit_tag 'Cancel', type: :reset, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane" id="lB">
+      <div class="gen-section-heading">
+        <h4>Manage your place</h4>
+        <p><small> Add details about your place </small></p>
+      </div>
+      <div class="gen-section-body">
+        <%= simple_form_for @space, html: { class: "form-horizontal", id: "space-details-form" } do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <%= f.input :bedrooms, collection: bedroom_options, hint: "<small class='muted'>Number of bedrooms in your home</small>", default: "1" %>
+          <%= f.input :bathrooms, collection: bathroom_options, hint: "<small class='muted'>Number of bathrooms in your home</small>", default: "1" %>
+          <%= f.input :room_type, collection: room_types, label: "What do you offer?", default: room_types[0] %>
+          <%= f.input :capacity, collection: 1..50, hint: "<small class='muted'>Maximum number of people your space can accomodate</small>", default: 2 %>
+          <%= f.input :price, label: "Price in INR" %>
+          <%= f.input :locality, label: "Locality" %>
+          <%= f.input :city %>
+          <%= f.input :country, priority: ["India"] %>
+          <%= f.input :pincode %>
+          <div class="form-actions">
+          <%= f.submit "Save Changes", class: 'btn btn-custom' %>
+          <%= submit_tag 'Cancel', type: :reset, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane" id="lC">
+      <div class="gen-section-heading">
+        <h4>Manage your place</h4>
+        <p><small> Add photos that describe your place </small></p>
+      </div>
+      <div class="gen-section-body">
+        <%= render 'manage_photos' %>
+      </div>
+    </div>
+    <div class="tab-pane" id="lD">
+      <div class="gen-section-heading">
+        <h4>Manage your place</h4>
+        <p><small>The fields below are shown only to guests with confirmed booking</small></p>
+      </div>
+      <div class="gen-section-body">
+        <%= simple_form_for @space, html: { class: "form-horizontal" } do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <%= f.input :full_address, input_html: { class: "span4", rows: "5"} %>
+          <%= f.input :phone_number %>
+          <%= f.input :directions, input_html: { class: "span4", rows: "8"} %>
+          <div class="form-actions">
+            <%= f.submit "Save Changes", class: 'btn btn-custom' %>
+            <%= submit_tag 'Cancel', type: :reset, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane" id="lE">
+      <div class="gen-section-heading">
+        <h4>Advanced Options</h4>
+        <p><small></small></p>
+      </div>
+      <div class="gen-section-body">
+        <a href="#" id="remove-space-show"><strong>Remove your space</strong></a>
+        <section id="remove-space">
+          <div class="alert alert-block alert-error fade in">
+            <h5 class="alert-heading">Delete Space</h5>
+            <p>This action is permanent and can not be reversed.</p>
+            <p>
+              <%= link_to raw('<i class="icon-remove icon-white"></i> Delete Space'), @space, method: :delete, data: { confirm: 'Do you want to remove this space?'}, class: 'btn btn-danger' %> <a class="btn" href="#" id="remove-space-hide">Cancel</a>
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<!-- Sign-in modal begin-->
+<div id="signInModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="signInLabel" aria-hidden="true">
+  <div class="modal-header">
+  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 id="signInLabel">Log in</h4>
+  </div>
+  <div class="modal-body">
+    <section id="sign-in-options">
+      <div class="accordion-group">
+        <div class="collapse in" id="fb-login">
+          <p style="text-align:center"> <%= link_to(image_tag("fblog.png"), user_omniauth_authorize_path(:facebook), class: "fb-connect-nav") %>
+          </p>
+          <p style="text-align:center">
+            <strong><em>or</em></strong>
+          </p>
+          <div class="use-email" style="text-align:center">
+            <h6><a data-parent="#sign-in-options" data-toggle="collapse" href="#email-signin" id="email-signup-link">Login using email</a></h6>
+          </div>
+        </div>  
+      </div>
+      <div class="accordion-group">
+        <div class="collapse" id="email-signin">
+          <div class="row-fluid">
+            <div class="span6 offset3">
+              <h6><i class="icon icon-arrow-left"></i> <a data-parent="#sign-in-options" data-toggle="collapse" href="#fb-login" id="social-signup-link">Login with Facebook</a></h6>
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <legend><small>Login using email</small></legend>
+                <%= render 'shared/error_messages', object: f.object %>
+                <div class="input-prepend">
+                  <span class="add-on">
+                    <i class="icon-envelope"></i>
+                  </span> 
+                  <%= f.text_field :email, placeholder: "email" %>
+                </div>
+                <div class="input-prepend">
+                  <span class="add-on">
+                    <i class="icon-briefcase"></i>
+                  </span> 
+                  <%= f.password_field :password, placeholder: "password" %>
+                </div>
+                <label class="checkbox">
+                  <%= check_box_tag(:remember_me) %> Remember me
+                </label>
+                <button class="btn btn-custom offset1" type="submit">
+                  <i class='icon-ok'></i> Sign in
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="modal-footer">
+    <div class="pull-left">
+      <%= link_to "Sign up", new_user_registration_path %><br/>
+      <%= link_to "Forgot your password?", new_user_password_path %>
+    </div>
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+<!-- Sign-in modal end-->

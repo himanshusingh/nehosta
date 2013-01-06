@@ -1,10 +1,15 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.9'
+
 gem 'bootstrap-sass', '2.2.1.1'
+gem 'font-awesome-sass-rails'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.9'
 
+gem 'simple_form', '2.0.4'
+gem 'country_select'
+gem 'best_in_place', '2.0.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development,:test do

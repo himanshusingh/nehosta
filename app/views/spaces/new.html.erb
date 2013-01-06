@@ -1,34 +1,21 @@
 <% provide(:title, 'Add Space') %>
-<h1> Add your Space </h1>
-<%= form_for @space, html: {class: "form-horizontal"} do |f| %>
-	<%= render 'shared/error_messages', object: f.object %>
-	<div class="control-group">
-		<%= f.label :name, class: "control-label" %>
-		<div class="controls">
-			<%= f.text_field :name %>
-		</div>
-	</div>
-	<div class="control-group">
-		<%= f.label :bedrooms, class: "control-label" %>
-		<div class="controls">
-      		<%= f.select(:bedrooms, bedroom_options) %>
-      	</div>
+<div class="gen-section-heading"><h4>Add Your Space</h4></div>
+<div class="gen-section-body">
+  <%= simple_form_for @space, html: { class: "form-horizontal" } do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.input :name, :input_html => { class: "span6" }, hint: "<small class='muted'>What do you call your home?</small>" %>
+    <%= f.input :bedrooms, collection: bedroom_options, hint: "<small class='muted'>Number of bedrooms in your home</small>", default: "1" %>
+    <%= f.input :bathrooms, collection: bathroom_options, hint: "<small class='muted'>Number of bathrooms in your home</small>", default: "1" %>
+    <%= f.input :room_type, collection: room_types, label: "What do you offer?", default: room_types[0] %>
+    <%= f.input :capacity, collection: 1..50, hint: "<small class='muted'>Maximum number of people your space can accomodate</small>", default: 2 %>
+    <%= f.input :price, label: "Price in INR" %>
+    <%= f.input :locality, label: "Locality" %>
+    <%= f.input :city %>
+    <%= f.input :country, priority: ["India"] %>
+    <%= f.input :pincode %>
+    <div class="form-actions">
+    <%= f.submit "Add your space!", class: 'btn btn-custom' %>
+    <%= submit_tag 'Cancel', :type => :reset, :class => "btn btn-danger" %>
     </div>
-    <div class="control-group">
-    	<%= f.label :bathrooms, class: "control-label" %>
-    	<div class="controls">
-   		    <%= f.select(:bathrooms, bathroom_options) %>
-   		</div>
-   	</div>
-   	<div class="control-group">
-      	<%= f.label :room_type, "What do you offer?", class: "control-label" %>
-      	<div class="controls">
-      		<%= f.select(:room_type, room_types) %>
-     	</div>
-    </div>
-    <div class="control-group">
-    	<div class="controls">
-    		<%= f.submit "Add my space", class: "btn btn-large" %>
-    	</div>
-    </div>
-<% end %>
+  <% end %>
+</div>

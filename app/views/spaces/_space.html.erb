@@ -1,0 +1,20 @@
+<li class="spaceListElem">
+	<div class="spaceInfo">
+		<div class="photoAndDetails">
+			<div class="spaceCover">
+				<%= link_to(image_tag(space.photos.first.picture.url(:thumb), class: "img-polaroid"), space) if space.photos.any? %>
+			</div>
+			<div class="spaceDetails">
+				<h5><%= link_to space.name, space %></h5>
+				<p class="spaceTypeAndLocation"><small><%= space.room_type %> <em>in</em></small>  <%= space.location %></p>
+				<small class="muted">
+					<%= truncate space.description, length: 150 %><%= link_to 'more', space %>
+				</small>
+			</div>
+		</div>
+		<div class="spacePrice">
+			<strong>&#x20B9; <%= space.price %></strong> <small>per night</small>
+		</div>
+		<%if space.user == current_user %><%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_space_path(space), class: 'btn btn-custom'%><%end%>
+	</div>
+</li>

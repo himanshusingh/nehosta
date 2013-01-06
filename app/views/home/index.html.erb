@@ -1,11 +1,6 @@
-<h2> Welcome </h2>
-<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
-<% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
-  </li>
-<% else %>
-  <li>
-  <%= link_to('Login', new_user_session_path)  %>  
-  </li>
-<% end %>
+<% provide(:title, 'Welcome to Nehosta') %>
+<section id="about-kumbh">
+	<h1> Welcome </h1>
+	<h2> Find a place to stay during Kumbh Mela </h2>
+	<h3> <%= link_to 'Show me all the places to stay!', spaces_path %> </h3>
+</section>

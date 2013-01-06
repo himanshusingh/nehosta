@@ -1,8 +1,18 @@
-Trytry::Application.routes.draw do
+Nehosta::Application.routes.draw do
   match '/auth/:provider/callback', to: 'authentications#create'
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   root to: 'home#index'
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      delete :delete_photo
+      get :spaces
+    end
+  end
+  resources :spaces do
+    resources :photos, only: [:create, :destroy, :update, :edit]
+  end
+  match '/about', to: 'home#about'
+  match '/contact', to: 'home#contact'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

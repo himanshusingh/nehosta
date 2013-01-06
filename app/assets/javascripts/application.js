@@ -12,4 +12,28 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require best_in_place
+//= require best_in_place.purr
+//= require bootstrap
 //= require_tree .
+
+
+$(document).ready(function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
+  $('.carousel').carousel({
+      interval: 3500
+  });
+  $('.carousel').carousel('cycle');
+
+  $('#remove-space').hide();
+  $('#remove-space-show').click(function() {
+  	$('#remove-space-show').hide();
+    $('#remove-space').show();
+  });
+  $('#remove-space-hide').click(function() {
+  	$('#remove-space-show').show();
+    $('#remove-space').hide();
+  });
+});

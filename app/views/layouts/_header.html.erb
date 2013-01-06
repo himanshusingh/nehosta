@@ -1,0 +1,39 @@
+<header class="navbar nav-pills navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<%= link_to("Unnamed", root_path, class: "brand") %>
+			<nav>
+			  <ul class="nav nav-pills pull-right">
+			  	<% if user_signed_in? %>
+			  	  <li><%= link_to(image_tag("fb_connect.png", { mouseover: "fb_connect_hover.png", size: "180x20" }), user_omniauth_authorize_path(:facebook), class: "fb-connect-nav") unless fb_connected?(current_user) %></li>
+			  	  <li class="dropdown">
+			  	  	<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 10px 2px"><%=image_tag current_user.avatar.url(:small), class: "img-rounded"%><b class="caret" style="margin-top:18px"></b></a>
+			  	  	<ul class="dropdown-menu">
+			  	  	  <li><%= link_to('Profile', current_user) %></li>
+			  	  	  <li><%= link_to('Add Your Home', '/spaces/new') %></li>
+			  	  	  <li><%= link_to('Your listings', spaces_user_path(current_user)) %></li>
+			  	  	  <li class="divider"></li>
+			  	  	  <li class="nav-header">Settings</li>
+			  	  	  <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+			  	  	  <li><%= link_to('Logout' , destroy_user_session_path, :method => :delete)%></li>
+			  	  	</ul>
+			  	  </li>
+			  	<% else %>
+			  	  <li><%=link_to('Login', new_user_session_path, remote: true)%></li>
+			  	  <li><%=link_to('Sign Up', new_user_registration_path)%></li>
+			  	<% end %>
+			  	<li class="divider-vertical"></li>
+			  	<li class="dropdown">
+			  	  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+			  	  <ul class="dropdown-menu">
+			  	  	<li><%= link_to "FAQs", '#' %></li>
+			  	  	<li><%= link_to "Contact", '#' %></li>
+			  	  	<li><%= link_to "About", '#' %></li>
+			  	  </ul>
+			  	</li>
+			  </ul>
+			</nav>
+	  	</div>  	
+	</div>
+</header>
+<div id="regModal"></div>

@@ -1,0 +1,26 @@
+<%= simple_form_for @space.photos.build, url: space_photos_path(@space) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.input :picture, label: "Photo" %>
+  <%= f.input :caption %>
+  <%= f.submit 'Add Picture', class: "btn btn-custom" %>
+<% end %>
+<div class="row-fluid">
+  <% if @space.photos.any? %>
+  <ul class="thumbnails">
+    <% @space.photos.each do |photo| %>
+    <% unless photo.new_record? %>
+      <li class="span4">
+        <div class="thumbnail">
+          <%= link_to(raw('<i class="icon-remove"></i>'), space_photo_path(space_id: @space.id, id: photo.id), method: :delete, data: { confirm: 'Do you want to remove this photo?', placement: 'right' }, rel: 'tooltip', title: 'Remove this photo') %>
+          <%= image_tag(photo.picture.url(:medium)) %>
+          <div class="caption">
+              <p><%= best_in_place(photo, :caption, path: '/spaces/'+@space.id.to_s+'/photos/'+photo.id.to_s) %></p>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    <% end %>
+  <% end %>
+  </ul>
+</div>
+
