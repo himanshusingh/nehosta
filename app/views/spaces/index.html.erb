@@ -1,5 +1,9 @@
 <%= will_paginate %>
+<% @spaces.each do |space| %>
+<% if space.visible? %>
 <ul class="spacesList">
-	<%= render @spaces %>
+	<%= render space %>
 </ul>
+<% end %>
+<% end %>
 <%= will_paginate %>

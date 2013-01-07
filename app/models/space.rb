@@ -48,4 +48,8 @@ class Space < ActiveRecord::Base
 	def location
 		locality + ", " + city + ", " + country
 	end
+
+	def visible?
+		!(description.blank? || photos.empty?)
+	end
 end
