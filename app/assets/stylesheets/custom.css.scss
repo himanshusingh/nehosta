@@ -52,7 +52,7 @@ html, body {
 }
 
 footer {
-  border-top: 1px solid $steelBlue;
+  border-top: 1px solid $steelBlueLight;
   background-color: $steelBlueLight;
   padding-top: 10px;
   small { 
@@ -89,11 +89,14 @@ a.brand {
 }
 
 /* Fonts */
-h1, h2, h3, h4, h5, h6, legend {
-    font-family: 'Corben', Georgia, Times, serif;
+h1, h2, h3 {
+  font-family: 'Corben', Georgia, Times, serif;
 }
 p, div {
-    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+  font-family: 'Lora', Georgia, serif;
+}
+h5, h6, legend {
+  font-family: 'Corben', Georgia, Times, serif;
 }
 
 #error_explanation {
@@ -235,4 +238,17 @@ body .modal-header {
       }
     }
   }
+}
+
+#about-nehosta {
+  margin-top: 25%;
+  color: white;
+  text-align: center;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  z-index: 2;
+  background-color: rgba(57, 60, 61, 0.8);
+  padding: 10px;
+  font-size: 14px;
 }
