@@ -45,13 +45,13 @@
 				<% @user.spaces.each do |space| %>
 					<% if space.description.blank? %>
 					<div class="alert alert-error fade in">
-					  <p>Please add description about <%=space.name%> to make it visible. <%= link_to('Go!', edit_space_path(space), class: "btn btn-danger") %></p>
+					  <p>Please add description about '<%=space.name%>' to make it visible. <%= link_to('Go!', edit_space_path(space), class: "btn btn-danger") %></p>
 					  <small>Tell your potential guests why your space is great! What is expected of them during the stay. A good description serve as an advertisement for your place.</small>
 					</div>
 					<% end %>
 					<% if space.photos.empty? %>
 					<div class="alert alert-error fade in">
-					  <p>Please add photos of <%=space.name%> to make it visible. <%= link_to('Go!', edit_space_path(space), class: "btn btn-danger") %></p>
+					  <p>Please add photos of '<%=space.name%>' to make it visible. <%= link_to('Go!', edit_space_path(space), class: "btn btn-danger") %></p>
 					  <small>Add photos that describe the space you offer. Photos are needed to display your listing in the search results.</small>
 					</div>
 					<% end %>

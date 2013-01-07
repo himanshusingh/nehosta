@@ -2,6 +2,8 @@
 /* @import "font-awesome"; */
 /* mixins, variables, etc. */
 $grayMediumLight: #eaeaea;
+$steelBlue: #4682b4;
+$steelBlueLight: #B0C4DE;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
@@ -28,18 +30,31 @@ section {
 textarea {
   resize: vertical;
 }
+/* Sticky footer styles
+-------------------------------------------------- */
+html, body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push, footer {
+  height: 60px;
+}
 
 footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
-  a {
-    color: $gray;
-    &:hover { 
-      color: $grayDarker;
-    }
-  }  
+  border-top: 1px solid $steelBlue;
+  background-color: $steelBlueLight;
+  padding-top: 10px;
   small { 
     float: left; 
   }
@@ -53,6 +68,9 @@ footer {
   }
 }
 
+a.brand {
+  padding: 0px !important;
+}
 .btn-custom {
   background-color: hsl(209, 69%, 41%) !important;
   background-repeat: repeat-x;
@@ -190,4 +208,31 @@ body .modal-header {
   border: 1px solid #DBDADC;
   padding: 8px;
   background-color: #F9F9F9;
+}
+
+/* Home Page */
+
+#home_page_full {
+  .navbar {
+    a {
+      color: #fff;
+      &:hover {
+        color: #fff;
+      }
+    }
+    .navbar-inner {
+      background:transparent !important;
+      border: none;
+      .container {
+        .dropdown-menu {
+          a {
+            color: #777;
+            &:hover {
+              color: #333;
+            }
+          }
+        }
+      }
+    }
+  }
 }
