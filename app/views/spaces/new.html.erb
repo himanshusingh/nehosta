@@ -8,7 +8,11 @@
     <%= f.input :bathrooms, collection: bathroom_options, hint: "<small class='muted'>Number of bathrooms in your home</small>", default: "1" %>
     <%= f.input :room_type, collection: room_types, label: "What do you offer?", default: room_types[0] %>
     <%= f.input :capacity, collection: 1..50, hint: "<small class='muted'>Maximum number of people your space can accomodate</small>", default: 2 %>
-    <%= f.input :price, label: "Price in INR" %>
+
+    <%= f.input :price, wrapper: :prepend, label: "Price in INR", hint: "<small class='muted'>price per night</small>" do %>
+        <span class="add-on">&#x20B9;</span>
+        <%= f.input_field :price %>
+    <% end %>
     <%= f.input :locality, label: "Locality" %>
     <%= f.input :city %>
     <%= f.input :country, priority: ["India"] %>
