@@ -7,9 +7,9 @@
 	<div class="gen-section-body">
 		<div class="row-fluid">
 			<div class="span9">
+				<% if @space.photos.any? %>
 				<div id="spacePhotosCarousel" class="carousel slide">
 				 	<div class="carousel-inner">
-				 		<% if @space.photos.any? %>
 				 			<% @space.photos.each_with_index do |photo, idx|%>
 				 			<% unless photo.new_record? %>
 				 			<% if idx == 0 %>
@@ -29,11 +29,11 @@
 				 			<% end %>
 				 			<% end %>
 				 			<% end %>
-				 		<% end %>
 				 	</div>
 				 	<a class="left carousel-control" href="#spacePhotosCarousel" data-slide="prev" style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">&lsaquo;</a>
 				 	<a class="right carousel-control" href="#spacePhotosCarousel" data-slide="next" style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;">&rsaquo;</a>
 				</div>
+				<% end %>
 				<div class="row-fluid">
 					<div class="span6">	
 						<table class="table table-hover table-condensed table-bordered">
