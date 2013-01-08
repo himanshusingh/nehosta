@@ -96,6 +96,11 @@
 			 	<% end %>
 			</div>
 			<div class="span3">
+				<section id="book-me">
+					<p>Price per night:</p>
+					<p>&#x20B9; <%=@space.price%></p>
+					<div class="btn btn-warning">Book it</div>
+				</section>
 				<section id="host-profile">
 					<div class="thumbnail">
 						<%= image_tag(@host.avatar.url) %>

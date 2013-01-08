@@ -11,8 +11,10 @@ Nehosta::Application.routes.draw do
   resources :spaces do
     resources :photos, only: [:create, :destroy, :update, :edit]
   end
-  match '/about', to: 'home#about'
-  match '/contact', to: 'home#contact'
+  match '/about', to: 'infos#about'
+  match '/contact', to: 'infos#contact'
+  match '/faq', to: 'infos#faq'
+  match '/howitworks', to: 'infos#howitworks'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

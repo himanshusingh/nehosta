@@ -3,11 +3,10 @@
 <head>
   <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <meta name="google-site-verification" content="kqiKHKoffIPBLXr1sm-qcFk-SRSQ9NnpeivL5j33_68" />
   <%= render 'layouts/shim' %>
   <meta name="description" content="Find accomodation during kumbh 2013. Enjoy local culture and hospitality. With Nehosta you can book a home in Allahabad during Kumbh 2013">
+  <meta name="keywords" content="kumbh, accomodation, Allahabad, home stay, mahakumbh" />
   <!-- Analytics -->
   <script type="text/javascript">
 
@@ -25,9 +24,6 @@
 </head>
 <body id="home_page_full">
 	<div id="wrap">
-		<div style='position:absolute;z-index:-99999;left:0;top:0;width:100%;height:100%'>
-		  <img src='/assets/agarbati.jpg' style='width:100%;height:100%' alt='[]' />
-		</div>
 		<%= render 'layouts/header' %>
 		<div class="container-fluid">
 			<% flash.each do |key, value| %>
@@ -41,5 +37,6 @@
 	<%= render 'layouts/footer' %>
 	<link href="http://fonts.googleapis.com/css?family=Corben" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
+  <%= javascript_include_tag "application" %>
 </body>
 </html>
