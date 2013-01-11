@@ -103,7 +103,7 @@
 				</section>
 				<section id="host-profile">
 					<div class="thumbnail">
-						<%= image_tag(@host.avatar.url) %>
+						<%= image_tag(@host.avatar.url(:medium)) %>
 					  	<div class="caption">
 					    <h4><%= link_to @host.first_name, @host%></h4>
 					    <p><%=@host.location%></p>

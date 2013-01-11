@@ -34,6 +34,7 @@ gem 'devise', '2.1.2'
 
 # Photos
 gem 'paperclip', '3.3.1'
+gem 'aws-sdk'
 
 group :production do
   gem 'pg'

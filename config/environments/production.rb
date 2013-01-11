@@ -64,4 +64,31 @@ Nehosta::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
+  # ActionMailer Config
+  # Setup for production - deliveries, no errors raised
+  config.action_mailer.default_url_options = { host: 'nehosta.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+
+  config.action_mailer.smtp_settings = {
+    address: "smtp.mandrillapp.com",
+    port: 25, # or 587
+    enable_starttls_auto: true, # detects and uses STARTTLS
+    user_name: ENV["MANDRILL_USER"],
+    password: ENV["MANDRILL_PASSWORD"],
+    authentication: 'login' # Mandrill supports 'plain' or 'login'
+  }
+
+  # Paperclip aws s3
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV['AWS_BUCKET'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
 end

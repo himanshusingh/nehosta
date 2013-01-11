@@ -22,7 +22,6 @@ class Photo < ActiveRecord::Base
 
 	has_attached_file :picture, 
 	  url: "/:attachment/:id/:style/:basename.:extension",
-	  default_url: "/images/missing_:style.jpg",
 	  path: ":rails_root/public/:attachment/:id/:style/:basename.:extension",
-	  styles: { gallery: "686x482#", medium: "260x180#", thumb: "160x160#", small: "40x40#" }
+	  styles: { gallery: "686x482#", thumb: "160x160#" }
 end

@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
     url: "/:attachment/:id/:style/:basename.:extension",
     default_url: "/images/missing_:style.jpg",
     path: ":rails_root/public/:attachment/:id/:style/:basename.:extension",
-    styles: { medium: "260x180#", thumb: "100x100#", small: "40x40#" }
+    styles: { medium: "640x480>", thumb: "100x100>", small: "40x40>" }
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
