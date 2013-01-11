@@ -29,21 +29,20 @@ class Space < ActiveRecord::Base
 	has_many :photos, dependent: :destroy
 	accepts_nested_attributes_for :photos, allow_destroy: true, reject_if: proc { |pic| pic[picture].nil? }
 	serialize :amenities
-	attr_accessible :name,:description,:rules,:street_address,:locality,:city,:country,:pincode,
+	attr_accessible :name,:description,:rules,:full_address,:locality,:city,:country,
 					:capacity,:bedrooms,:bathrooms,:room_type,:price,:amenities,:size,:directions
 
+	validates :user_id, presence: true
 	validates :name, presence: true, length: { maximum: 50 }
 	validates :locality, presence: true, length: { maximum: 50 }
 	validates :city, presence: true, length: { maximum: 50 }
-	validates :pincode, presence: true
 	validates :bedrooms, presence: true
 	validates :bathrooms, presence: true
-	validates :street_address, presence: true, length: { maximum: 50 }
-	validates :user_id, presence: true
 	validates :price, presence:true
 	validates :room_type, presence: true
 	validates :description, length: { maximum: 1250 }
 	validates :directions, length: { maximum: 1250 }
+	validates :full_address, length: { maximum: 500 }
 
 	def location
 		locality + ", " + city + ", " + country
