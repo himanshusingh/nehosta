@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true, length: { maximum: 50 }
   validates :first_name, length: { maximum: 50 }
   validates :sex, presence: true
-  validates :description, length: { maximum: 1250 }
+  validates :description, length: { maximum: 3000 }
 
   # Avatar
   has_attached_file :avatar, 

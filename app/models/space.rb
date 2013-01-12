@@ -34,14 +34,15 @@ class Space < ActiveRecord::Base
 
 	validates :user_id, presence: true
 	validates :name, presence: true, length: { maximum: 50 }
-	validates :locality, presence: true, length: { maximum: 50 }
-	validates :city, presence: true, length: { maximum: 50 }
+	validates :locality, presence: true, length: { maximum: 100 }
+	validates :city, presence: true, length: { maximum: 100 }
 	validates :bedrooms, presence: true
 	validates :bathrooms, presence: true
 	validates :price, presence:true
 	validates :room_type, presence: true
-	validates :description, length: { maximum: 1250 }
-	validates :directions, length: { maximum: 1250 }
+	validates :description, length: { maximum: 5000 }
+	validates :directions, length: { maximum: 2000 }
+	validates :rules, length: { maximum: 4000 }
 	validates :full_address, length: { maximum: 500 }
 
 	def location
