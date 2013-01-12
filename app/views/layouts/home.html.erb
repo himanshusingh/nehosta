@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <link href="http://fonts.googleapis.com/css?family=Corben" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/assets/favico.png">
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
   <meta name="description" content="Find accomodation during kumbh 2013. Enjoy local culture and hospitality. With Nehosta you can book a home in Allahabad during Kumbh 2013">
@@ -41,5 +42,13 @@
     <p style="text-align:center"><small>Photo by Jean-Marie Hullot (Own work) [<a href="http://creativecommons.org/licenses/by/3.0">CC-BY-3.0</a>], <a href="http://commons.wikimedia.org/wiki/File%3AThaiincensesunset.jpg">via Wikimedia Commons</a></small></p>
   </div>
   <%= javascript_include_tag "application" %>
+  <script type="text/javascript">
+    var uvOptions = {};
+    (function() {
+      var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+      uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/7QgPjIM6VMEcTWnkWNew.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+    })();
+  </script>
 </body>
 </html>
