@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
 
   has_many :spaces, dependent: :destroy
 
+  after_create :send_welcome_email
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :birthday, :description, :fb_url, :first_name, :last_name, :location, :provider, :sex, :uid, :avatar
@@ -100,5 +102,11 @@ class User < ActiveRecord::Base
     	end
     end
     user
+  end
+
+  private
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver
   end
 end
