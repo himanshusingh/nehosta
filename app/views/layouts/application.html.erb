@@ -9,12 +9,11 @@
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
   <meta name="description" content="Find accomodation during kumbh 2013. Enjoy local culture and hospitality. With Nehosta you can book a home in Allahabad during Kumbh 2013">
+  <!-- Google Analytics -->
   <script type="text/javascript">
-
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-37477244-1']);
     _gaq.push(['_trackPageview']);
-
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -22,6 +21,15 @@
     })();
 
   </script>
+  <!--Start of Zopim Live Chat Script-->
+  <script type="text/javascript">
+  window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+  d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+  _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+  $.src='//cdn.zopim.com/?vSt2HxSpH4EDpJIfDbS0FkvjgH7Cd0uw';z.t=+new Date;$.
+  type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+  </script>
+  <!--End of Zopim Live Chat Script-->
 </head>
 <body>
 	<div id="wrap">
@@ -37,6 +45,7 @@
 	</div>
 	<%= render 'layouts/footer' %>
   <%= javascript_include_tag "application" %>
+  <!-- Start of Feedback uservoice -->
   <script type="text/javascript">
     var uvOptions = {};
     (function() {
@@ -45,5 +54,6 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
     })();
   </script>
+  <!-- End of Feedback uservoice -->
 </body>
 </html>

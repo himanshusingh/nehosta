@@ -22,6 +22,10 @@ module ApplicationHelper
 		end
 	end
 
+	def admin_user
+		redirect_to root_path unless current_user.try(:admin?)
+	end
+
 	# Devise resource name fix
 	def resource_name
 	  :user

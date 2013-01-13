@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   validates_attachment_size :avatar, less_than: 5.megabytes
   validates_attachment_content_type :avatar, content_type: ['image/jpeg', 'image/png']
   validates :last_name, presence: true, length: { maximum: 50 }
-  validates :first_name, length: { maximum: 50 }
+  validates :first_name, presence: :true, length: { maximum: 50 }
   validates :sex, presence: true
   validates :description, length: { maximum: 3000 }
 

@@ -2,7 +2,7 @@ Nehosta::Application.routes.draw do
   match '/auth/:provider/callback', to: 'authentications#create'
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   root to: 'home#index'
-  resources :users, only: [:show, :edit, :update] do
+  resources :users, only: [:show, :edit, :update, :index, :destroy] do
     member do
       delete :delete_photo
       get :spaces
