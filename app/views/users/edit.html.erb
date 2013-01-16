@@ -9,7 +9,7 @@
     <%= f.input :last_name %>
     <%= f.input :sex, collection: ['male', 'female'], as: :radio_buttons, item_wrapper_class: 'inline' %>
     <%= f.input :birthday, as: :date, start_year: Date.today.year-100, end_year: Date.today.year-1, input_html: { class: "span2"} %>
-    <%= f.input :description, input_html: { class: "span6", rows: "12"} %>
+    <%= f.input :description, label: "About me", input_html: { class: "span6", rows: "12"} %>
     <%= f.input :location %>
     <%= f.input :avatar, label: "Photo" %>
     <div class="form-actions">
