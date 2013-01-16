@@ -1,8 +1,8 @@
 class PhotosController < ApplicationController
-	before_filter :signed_in_user, only: [:create, :destroy, :update]
-	before_filter :correct_user, only: [:destroy, :update, :edit]
+	before_filter :signed_in_user, only: [:create, :destroy, :update, :edit]
+	before_filter :correct_user, only: [:create, :destroy, :update, :edit]
 	def create
-		@space = current_user.spaces.find_by_id(params[:space_id])
+		@space = Space.find_by_id(params[:space_id])
 		@photo = @space.photos.build(params[:photo])
 		if @photo.save
 			respond_to do |format|
@@ -18,7 +18,7 @@ class PhotosController < ApplicationController
 	end
 
 	def destroy
-		@space = current_user.spaces.find_by_id(params[:space_id])
+		@space = Space.find_by_id(params[:space_id])
 		@photo = @space.photos.find(params[:id])
 		@photo.destroy
 		respond_to do |format|
@@ -28,12 +28,12 @@ class PhotosController < ApplicationController
 	end
 
 	def edit
-		@space = current_user.spaces.find_by_id(params[:space_id])
+		@space = Space.find_by_id(params[:space_id])
 		@photo = @space.photos.find(params[:id])
 	end
 
 	def update
-		@space = current_user.spaces.find_by_id(params[:space_id])
+		@space = Space.find_by_id(params[:space_id])
 		@photo = @space.photos.find(params[:id])
 		if @photo.update_attributes(params[:photo])
 			respond_to do |format|
@@ -54,6 +54,6 @@ class PhotosController < ApplicationController
 
 	def correct_user
 		@space = current_user.spaces.find_by_id(params[:space_id])
-		redirect_to root_path if @space.nil?
+		redirect_to root_path unless @space || current_user.try(:admin?) 
 	end
 end
