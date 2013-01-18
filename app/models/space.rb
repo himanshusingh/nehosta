@@ -53,7 +53,7 @@ class Space < ActiveRecord::Base
 	end
 
 	def visible?
-		!(description.blank? || photos.empty?)
+		!(photos.empty?)
 	end
 
 	def booking_request_from?(user)

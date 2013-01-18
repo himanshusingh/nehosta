@@ -1,12 +1,9 @@
-<% if true %><h1 style="margin-top:25%;text-align:center">This page will be available soon</h1>
-<% else %>
 <%= will_paginate %>
 <% @spaces.each do |space| %>
 <% if space.visible? %>
 <ul class="spacesList">
 	<%= render space %>
 </ul>
-<% end %>
 <% end %>
 <%= will_paginate %>
 <% end %>
