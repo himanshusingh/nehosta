@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   has_many :spaces, dependent: :destroy
+  has_many :issued_requests, class_name: 'BookingRequest', foreign_key: :guest_id, dependent: :destroy
+  has_many :recieved_requests, class_name: 'BookingRequest', foreign_key: :host_id, dependent: :destroy
+  has_many :booked, class_name: 'Booking', foreign_key: :guest_id, dependent: :destroy
+  has_many :reservations, class_name: 'Booking', foreign_key: :host_id, dependent: :destroy
 
   after_create :send_welcome_email
 

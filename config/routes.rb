@@ -5,6 +5,10 @@ Nehosta::Application.routes.draw do
   resources :users, only: [:show, :edit, :update, :index, :destroy] do
     member do
       delete :delete_photo
+      get :home
+      get :inrequests
+      get :mybookings
+      get :mylistings
       get :spaces
     end
   end
@@ -15,6 +19,9 @@ Nehosta::Application.routes.draw do
   match '/contact', to: 'infos#contact'
   match '/faq', to: 'infos#faq'
   match '/howitworks', to: 'infos#howitworks'
+
+  resources :booking_requests
+  resources :bookings
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

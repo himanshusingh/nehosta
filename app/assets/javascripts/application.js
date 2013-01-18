@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery.ui.datepicker
 //= require best_in_place
 //= require best_in_place.purr
 //= require bootstrap
@@ -20,6 +20,7 @@
 
 
 $(document).ready(function() {
+  console.log('loaded');
   /* Activating Best In Place */
   jQuery(".best_in_place").best_in_place();
   $('.carousel').carousel({
@@ -36,4 +37,41 @@ $(document).ready(function() {
   	$('#remove-space-show').show();
     $('#remove-space').hide();
   });
+
+  $('#from_booking').datepicker({ dateFormat: 'yy-mm-dd', defaultDate: "+1w", minDate: "+0D", maxDate: new Date(2013, 2, 28), onClose: function(selectedDate) {
+    var date = $('#from_booking').datepicker('getDate');
+    date.setDate(date.getDate() + 1);
+    $('#to_booking').datepicker( "option", "minDate", date);
+    var startDate = $('#from_booking').datepicker('getDate');
+    var endDate = $('#to_booking').datepicker('getDate');
+    if (startDate && endDate) {
+      update_amounts(startDate, endDate);
+    }
+  }
+  });
+  $('#to_booking').datepicker({ dateFormat: 'yy-mm-dd', defaultDate: "+1w", minDate: "+1D", maxDate: new Date(2013, 2, 28),  onClose: function(selectedDate) {
+    var date = $('#to_booking').datepicker('getDate');
+    date.setDate(date.getDate() - 1);
+    $('#from_booking').datepicker("option", "maxDate", date);
+    var startDate = $('#from_booking').datepicker('getDate');
+    var endDate = $('#to_booking').datepicker('getDate');
+    if (startDate && endDate) {
+      update_amounts(startDate, endDate);
+    }
+  }
+  });
+  function update_amounts(startDate, endDate)
+  {
+    var price = parseInt($('#subtotal').data('price'), 10);
+    var days = 86400000;
+    var numdays = Math.abs(endDate-startDate)/days;
+    var subtotal = numdays*price;
+    var fee = Math.floor(subtotal*.1367);
+    var total = subtotal+fee;
+    $('#days_booking').html(numdays);
+    $('#subtotal').html("&#x20B9; " + subtotal);
+    $('#service_fee').html("&#x20B9; " + fee);
+    $('#total_amount').html("&#x20B9; " + total);
+  }
+
 });

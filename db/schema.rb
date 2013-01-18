@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130112175830) do
+ActiveRecord::Schema.define(:version => 20130117114618) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -20,6 +20,45 @@ ActiveRecord::Schema.define(:version => 20130112175830) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "booking_requests", :force => true do |t|
+    t.integer  "space_id"
+    t.integer  "guest_id"
+    t.integer  "host_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.float    "amount"
+    t.float    "fees"
+    t.float    "rent"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "booking_requests", ["guest_id", "space_id"], :name => "index_booking_requests_on_guest_id_and_space_id", :unique => true
+  add_index "booking_requests", ["guest_id"], :name => "index_booking_requests_on_guest_id"
+  add_index "booking_requests", ["host_id"], :name => "index_booking_requests_on_host_id"
+  add_index "booking_requests", ["space_id"], :name => "index_booking_requests_on_space_id"
+  add_index "booking_requests", ["start_date", "end_date"], :name => "index_booking_requests_on_start_date_and_end_date"
+
+  create_table "bookings", :force => true do |t|
+    t.integer  "space_id"
+    t.integer  "guest_id"
+    t.integer  "host_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.float    "amount"
+    t.float    "fees"
+    t.float    "rent"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "bookings", ["guest_id", "space_id"], :name => "index_bookings_on_guest_id_and_space_id", :unique => true
+  add_index "bookings", ["guest_id"], :name => "index_bookings_on_guest_id"
+  add_index "bookings", ["host_id"], :name => "index_bookings_on_host_id"
+  add_index "bookings", ["space_id"], :name => "index_bookings_on_space_id"
+  add_index "bookings", ["start_date", "end_date"], :name => "index_bookings_on_start_date_and_end_date"
 
   create_table "photos", :force => true do |t|
     t.string   "caption",              :default => ""

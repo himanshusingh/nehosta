@@ -1,13 +1,18 @@
 class UsersController < ApplicationController
 	before_filter :signed_in_user, only: [:edit, :update, :delete_photo]
-	before_filter :correct_user, only: [:edit, :update, :delete_photo]
+	before_filter :correct_user, only: [:edit, :update, :delete_photo, :home, :inrequests, :mybookings]
 	before_filter :admin_user, only: [:index, :destroy]
+	layout 'dashboard', only: [:home, :alerts, :mylistings, :mybookings]
 
 	def index
 	  @users = User.paginate(page: params[:page])
 	end
 
 	def show
+		@user = User.find(params[:id])
+	end
+
+	def home
 		@user = User.find(params[:id])
 	end
 
@@ -48,6 +53,15 @@ class UsersController < ApplicationController
 
 	def spaces
 		@spaces = Space.paginate(page: params[:page], conditions: ['user_id = ?', params[:id]])
+	end
+
+	def mybookings
+		@user = User.find(params[:id])
+	end
+
+	def inrequests
+		@user = User.find(params[:id])
+		@requests = @user.recieved_requests
 	end
 
 	private

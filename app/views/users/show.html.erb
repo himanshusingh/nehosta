@@ -1,5 +1,4 @@
 <% provide(:title, 'Profile') %>
-
 <div class="row-fluid">
 	<aside class="span3">
 		<section id="user-profile-pic">
@@ -20,47 +19,25 @@
 		</section>
 	</aside>
 	<div class="span9">
-		<% unless @user.description.blank? %>
-			<legend>About Me</legend>
-			<p><%= @user.description %></p>
-		<% end %>
-		<% if @user.spaces.any? %>
-			<legend>My listings</legend>
-			<ul>
-				<% @user.spaces.each do |space| %>
-					<li><%= link_to space.name, space %></li>
-				<% end %>
-			</ul>
-		<% end %>
-
-		<% if @user==current_user %>
-			<legend>Alerts</legend>
-			<% if @user.description.blank? %>
-				<div class="alert fade in">
-				  <button type="button" class="close" data-dismiss="alert">&times;</button>
-				  Let people know about you. Please tell us and others more about yourself.   <%= link_to('Go!', edit_user_path(@user), class: "btn btn-warning") %>
-				</div>
+		<div class="gen-section-heading">
+			<h4>Hi, I am <%=@user.first_name%> <% if @user.location %><em>from</em> <%=@user.location%><%end%></h4>
+		</div>
+		<div class="gen-section-body">
+			<% unless @user.description.blank? %>
+				<legend>About Me</legend>
+				<p><%= @user.description %></p>
 			<% end %>
 			<% if @user.spaces.any? %>
-				<% @user.spaces.each do |space| %>
-					<% if space.description.blank? %>
-					<div class="alert alert-error fade in">
-					  <p>Please add description about '<%=space.name%>' to make it visible. <%= link_to('Go!', edit_space_path(space), class: "btn btn-danger") %></p>
-					  <p>Tell your potential guests why your space is great! What is expected of them during their stay. A good description serve as an advertisement for your place.</p>
-					</div>
+				<legend>My listings</legend>
+				<ul>
+					<% @user.spaces.each do |space| %>
+						<li><%= link_to space.name, space %></li>
 					<% end %>
-					<% if space.photos.empty? %>
-					<div class="alert alert-error fade in">
-					  <p>Please add photos of '<%=space.name%>' to make it visible. <%= link_to('Go!', edit_space_path(space), class: "btn btn-danger") %></p>
-					  <p>Add photos that describe the space you offer. Photos are needed to display your listing in the search results.</p>
-					</div>
-					<% end %>
-				<% end %>
+				</ul>
 			<% end %>
-		<% end %>
+		</div>
 	</div>
 
-	 
 	<!-- Photo Modal -->
 	<div id="photoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
 	  <div class="modal-header">

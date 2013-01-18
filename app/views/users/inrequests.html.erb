@@ -1,0 +1,40 @@
+<div class="navbar gen-section-heading">
+  <div class="navbar-inner">
+    <ul class="nav nav-pills">
+      <li><%=link_to 'Home', home_user_path(current_user)%></li>
+      <li><%=link_to 'Your listings', spaces_user_path(current_user)%></li>
+      <li><%=link_to 'Your Bookings', mybookings_user_path(current_user)%></li>
+      <li class="active"><%=link_to 'Booking Requests', '#' %></li>
+    </ul>
+  </div>
+</div>
+<div class="gen-section-body">
+	<% if @requests.any? %>
+	<ul class="requestsList">
+	<% @requests.each do |request| %>
+		<% @guest = User.find(request.guest_id) %>
+		<% @space = Space.find(request.space_id) %>
+		<li class="spaceListElem">
+			<div class="spaceInfo">
+				<div class="photoAndDetails">
+					<div class="spaceCover">
+						<%= link_to(image_tag(@guest.avatar.url(:thumb), class: "img-polaroid"), @guest)%>
+					</div>
+					<div class="spaceDetails">
+						<h4><%= link_to @guest.first_name, @guest%> want to stay in <%= link_to @space.name, @space%> from <%= request.start_date.strftime("%B %d, %Y") %> to <%=request.end_date.strftime("%B %d, %Y") %></h4>
+						<p class="spaceTypeAndLocation">from <%= request.start_date.strftime("%B %d, %Y") %> to <%=request.end_date.strftime("%B %d, %Y") %> </p>
+						<p>
+							<%= request.description %>
+						</p>
+					</div>
+				</div>
+				<div class="spacePrice">
+					<div class="btn btn-custom">Accept</div>
+					<div class="btn btn-danger">Decline</div>
+				</div>
+			</div>
+		</li>
+		<% end %>
+		<% end %>
+	</ul>
+</div>

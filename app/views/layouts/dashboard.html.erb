@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <link href="http://fonts.googleapis.com/css?family=Corben" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Lora" rel="stylesheet" type="text/css">
+
   <link rel="shortcut icon" href="/assets/favico.png">
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
@@ -32,22 +33,58 @@
   </script>
   <!--End of Zopim Live Chat Script-->
 </head>
-<body id="home_page_full">
+<body>
 	<div id="wrap">
 		<%= render 'layouts/header' %>
-		<div class="container-fluid">
+		<div class="container">
 			<% flash.each do |key, value| %>
 			  	<div class="alert alert-<%= key %>"><%= value %></div>
 			<% end %>
-			<%= yield %>
+			<div class="row-fluid">
+				<aside class="span3">
+					<section id="user-profile-pic">
+						<div class="thumbnail">
+							<%= image_tag(@user.avatar.url(:medium)) %>
+							<% if current_user == @user %>
+								<a href="#photoModal"  data-toggle="modal" data-placement="left" title="Change photo">
+									<i class="icon-edit"></i>
+								</a>
+
+								<%= link_to(raw('<i class="icon-remove"></i>'), { action: 'delete_photo', id: @user.id }, method: :delete, data: { confirm: 'Do you want to remove this photo?', placement: 'right' }, rel: 'tooltip', title: 'Remove this photo') %>
+							<% end %>
+						  	<div class="caption">
+						    <h4><%=@user.first_name%></h4>
+						    <p><%=@user.location%></p>
+						  </div>
+						</div>
+					</section>
+				</aside>
+				<div class="span9">
+					<%= yield %>
+				</div>
+
+				<!-- Photo Modal -->
+				<div id="photoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+				  <div class="modal-header">
+				  	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				    <h4 id="photoModalLabel">Select an image to upload below</h4>
+				  </div>
+				  	<div class="modal-body">
+				  		<%= simple_form_for(@user) do  |f| %>
+				  			<%= f.input :avatar, label: "Photo:" %>
+				  	</div>
+				    <div class="modal-footer">
+				      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				      <%= f.submit 'Save Changes', class: 'btn btn-primary' %>
+				    </div>
+				  <% end %>
+				</div>
+			</div>
 			<%= debug(params) if false and Rails.env.development? %>
 		</div>
 		<div id="push"></div>
 	</div>
 	<%= render 'layouts/footer' %>
-  <div style="background-color:#B0C4DE">
-    <p style="text-align:center"><small>Photo by Jean-Marie Hullot (Own work) [<a href="http://creativecommons.org/licenses/by/3.0">CC-BY-3.0</a>], <a href="http://commons.wikimedia.org/wiki/File%3AThaiincensesunset.jpg">via Wikimedia Commons</a></small></p>
-  </div>
   <%= javascript_include_tag "application" %>
   <!-- Start of Feedback uservoice -->
   <script type="text/javascript">

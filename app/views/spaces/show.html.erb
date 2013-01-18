@@ -99,7 +99,15 @@
 				<section id="book-me">
 					<p>Price per night:</p>
 					<p>&#x20B9; <%=@space.price%></p>
-					<div class="btn btn-warning">Book it</div>
+					<% if @space.booking_request_from?(current_user) %>
+					<% @request = @space.booking_requests.find_by_guest_id(current_user.id) %>
+					<div class="alert alert-block alert-warning fade in">
+					<p>Your Booking request from <%= @request.start_date.strftime("%B %d, %Y") %> to <%=@request.end_date.strftime("%B %d, %Y") %> of amount &#x20B9; <%=@request.amount%> is pending host's approval.</p>
+					<p><small><%=link_to('Cancel Request', @request, data: { confirm: "Do you want to cancel your booking request?" }, method: :delete)%></small></p>
+					</div>
+					<% else %>
+					<a data-toggle="modal" href="#requestModal" class="btn btn-warning">Book it</a>
+					<% end %>
 				</section>
 				<section id="host-profile">
 					<div class="thumbnail">
@@ -116,5 +124,64 @@
 				</section>
 			</div>
 		</div>
+	</div>
+
+
+	<div id="requestModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel" aria-hidden="true">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 id="requestModalLabel">Make a Booking request for <%=@space.name%></h4>
+		</div>
+		<% if current_user %>
+		<%= form_for(current_user.issued_requests.build(space_id: @space.id, host_id: @host.id), class: 'form-inline') do |f| %>
+		<div class="modal-body">
+			<div><%= f.hidden_field :space_id %></div>
+			<div><%= f.hidden_field :host_id %></div>
+			<div class="input-prepend">
+			  <span class="add-on"><i class="icon-calendar"></i></span>
+			  <%= f.text_field :start_date, placeholder: 'Check in yyyy-mm-dd', class: 'span3', id: 'from_booking' %>
+
+			  <span class="add-on"><i class="icon-calendar"></i></span>
+			  <%= f.text_field :end_date, placeholder: 'Check out yyyy-mm-dd', class: 'span3', id: 'to_booking' %>
+			</div>
+			<br/>
+			<p class="text-info">Price: <strong>&#x20B9; <%= @space.price %></strong> <small>per night</small></p>
+
+			<%= f.label :description, 'Description(Optional)' %>
+			<%= f.text_area :description, placeholder: 'Share with your potential hosts your plans. Add description specific to your trip to Allahabad.', class: 'span6', rows: '6' %>
+		</div>
+		<div class="modal-footer">
+			<table id="booking_amount" class="table table-condensed">
+				<tr>
+					<td>Number of days</td>
+					<td id="days_booking">0</td>
+				</tr>
+				<tr>
+					<td>Subtotal</td>
+					<td id="subtotal" data-price= "<%=@space.price%>">&#x20B9; 0</td>
+				</tr>
+				<tr>
+					<td>Nehosta service fee <small>(13.67%)</small></td>
+					<td id="service_fee">&#x20B9; 0</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td id="total_amount">&#x20B9; 0</td>
+				</tr>
+			</table>
+		  <%= f.submit "Create Booking Request", class: "btn btn-custom" %>
+		  <div class="btn" data-dismiss="modal">Cancel</div>
+		</div>
+		<% end %>
+		<% else %>
+		<div class="modal-body">
+			<div class="alert alert-warning fade in">
+				<p>Please Log in first to book this place.</p>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<div class="btn" data-dismiss="modal">Close</div>
+		</div>
+		<% end %>
 	</div>
 </section>

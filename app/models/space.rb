@@ -27,6 +27,9 @@
 class Space < ActiveRecord::Base
 	belongs_to :user
 	has_many :photos, dependent: :destroy
+	has_many :booking_requests, dependent: :destroy
+	has_many :bookings, dependent: :destroy
+	
 	accepts_nested_attributes_for :photos, allow_destroy: true, reject_if: proc { |pic| pic[picture].nil? }
 	serialize :amenities
 	attr_accessible :name,:description,:rules,:full_address,:locality,:city,:country,
@@ -51,5 +54,9 @@ class Space < ActiveRecord::Base
 
 	def visible?
 		!(description.blank? || photos.empty?)
+	end
+
+	def booking_request_from?(user)
+		user && self.booking_requests.find_by_guest_id(user.id)
 	end
 end
