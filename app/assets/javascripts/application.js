@@ -66,7 +66,7 @@ $(document).ready(function() {
     var days = 86400000;
     var numdays = Math.abs(endDate-startDate)/days;
     var subtotal = numdays*price;
-    var fee = Math.floor(subtotal*.1367);
+    var fee = Math.floor(subtotal*.0967);
     var total = subtotal+fee;
     $('#days_booking').html(numdays);
     $('#subtotal').html("&#x20B9; " + subtotal);

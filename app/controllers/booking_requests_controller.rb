@@ -7,7 +7,7 @@ class BookingRequestsController < ApplicationController
 		start_date = Date.parse(params[:booking_request][:start_date])
 		end_date = Date.parse(params[:booking_request][:end_date])
 		rent = ((end_date-start_date).to_i)*(@space.price)
-		fees = (rent*0.1367).floor
+		fees = (rent*0.0967).floor
 		amount = rent + fees
 		params[:booking_request][:rent] = rent
 		params[:booking_request][:fees] = fees
