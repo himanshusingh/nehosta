@@ -40,6 +40,7 @@ $(document).ready(function() {
 
   $('#from_booking').datepicker({ dateFormat: 'yy-mm-dd', defaultDate: "+1w", minDate: "+0D", maxDate: new Date(2013, 2, 28), onClose: function(selectedDate) {
     var date = $('#from_booking').datepicker('getDate');
+    if (date === null) return;
     date.setDate(date.getDate() + 1);
     $('#to_booking').datepicker( "option", "minDate", date);
     var startDate = $('#from_booking').datepicker('getDate');
@@ -51,6 +52,7 @@ $(document).ready(function() {
   });
   $('#to_booking').datepicker({ dateFormat: 'yy-mm-dd', defaultDate: "+1w", minDate: "+1D", maxDate: new Date(2013, 2, 28),  onClose: function(selectedDate) {
     var date = $('#to_booking').datepicker('getDate');
+    if (date === null) return;
     date.setDate(date.getDate() - 1);
     $('#from_booking').datepicker("option", "maxDate", date);
     var startDate = $('#from_booking').datepicker('getDate');

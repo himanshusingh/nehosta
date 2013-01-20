@@ -139,10 +139,10 @@
 			<div><%= f.hidden_field :host_id %></div>
 			<div class="input-prepend">
 			  <span class="add-on"><i class="icon-calendar"></i></span>
-			  <%= f.text_field :start_date, placeholder: 'Check in yyyy-mm-dd', class: 'span3', id: 'from_booking' %>
+			  <%= f.text_field :start_date, placeholder: 'Check in yyyy-mm-dd', class: 'span3', id: 'from_booking', style: "z-index: 10510" %>
 
 			  <span class="add-on"><i class="icon-calendar"></i></span>
-			  <%= f.text_field :end_date, placeholder: 'Check out yyyy-mm-dd', class: 'span3', id: 'to_booking' %>
+			  <%= f.text_field :end_date, placeholder: 'Check out yyyy-mm-dd', class: 'span3', id: 'to_booking', style: "z-index: 10510" %>
 			</div>
 			<br/>
 			<p class="text-info">Price: <strong>&#x20B9; <%= @space.price %></strong> <small>per night</small></p>
