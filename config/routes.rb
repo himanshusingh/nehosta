@@ -1,5 +1,6 @@
 Nehosta::Application.routes.draw do
   match '/auth/:provider/callback', to: 'authentications#create'
+  match '/auth/faliure', to: redirect('/')
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   root to: 'home#index'
   resources :users, only: [:show, :edit, :update, :index, :destroy] do

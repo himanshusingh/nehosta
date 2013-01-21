@@ -2,6 +2,10 @@ class BookingRequestsController < ApplicationController
 	before_filter :signed_in_user
 	before_filter :validate_dates, only: [:create]
 
+	def index
+		@requests = BookingRequest.all
+	end
+
 	def create
 		@space = Space.find(params[:booking_request][:space_id])
 		start_date = Date.parse(params[:booking_request][:start_date])
