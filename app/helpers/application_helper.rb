@@ -26,6 +26,10 @@ module ApplicationHelper
 		redirect_to root_path unless current_user.try(:admin?) || (current_user.id == 1)
 	end
 
+	def is_admin?
+		current_user.try(:admin?) || (current_user && current_user.id == 1)
+	end
+
 	# Devise resource name fix
 	def resource_name
 	  :user

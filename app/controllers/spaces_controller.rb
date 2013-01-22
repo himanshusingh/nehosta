@@ -54,7 +54,7 @@ class SpacesController < ApplicationController
 	def correct_user
 		@space = Space.find(params[:id])
 		@user = @space.user
-		redirect_to root_path unless current_user==@user || admin_user
+		redirect_to root_path unless current_user==@user || is_admin?
 	end
 
 end
