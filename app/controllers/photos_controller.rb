@@ -54,6 +54,6 @@ class PhotosController < ApplicationController
 
 	def correct_user
 		@space = current_user.spaces.find_by_id(params[:space_id])
-		redirect_to root_path unless @space || current_user.try(:admin?) 
+		redirect_to root_path unless @space || admin_user
 	end
 end
