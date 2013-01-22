@@ -2,6 +2,7 @@
 	<%= link_to(image_tag(user.avatar.url(:thumb), class: "pull-left", style: "margin-right: 10px"), user) %>
 	<p><%= user.first_name %> <%= user.last_name %>, <%= user.sex %>, <%= user.birthday %> lives in <%= user.location %></p>
 	<p><%= user.fb_url %></p>
+	<p><%= user.email %></p>
 	<p><%= link_to "Delete User", user, :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 	<small><%= user.description %></small>
 </li>
