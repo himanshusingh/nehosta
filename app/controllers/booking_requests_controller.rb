@@ -1,6 +1,7 @@
 class BookingRequestsController < ApplicationController
 	before_filter :signed_in_user
 	before_filter :validate_dates, only: [:create]
+	before_filter :admin_user, only: [:index]
 
 	def index
 		@requests = BookingRequest.all
