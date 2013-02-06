@@ -64,16 +64,26 @@ $(document).ready(function() {
   });
   function update_amounts(startDate, endDate)
   {
-    var price = parseInt($('#subtotal').data('price'), 10);
+    var price = parseInt($('#total_amount').data('price'), 10);
+    var type = $('#total_amount').data('type');
+    var guests = $('#booking_request_guests').val();
+
     var days = 86400000;
     var numdays = Math.abs(endDate-startDate)/days;
-    var subtotal = numdays*price;
-    var fee = Math.floor(subtotal*.0967) + 100;
-    var total = subtotal+fee;
+    var total = numdays*price;
+    if (type === 'Shared room')
+      total = guests*numdays*price;
     $('#days_booking').html(numdays);
-    $('#subtotal').html("&#x20B9; " + subtotal);
-    $('#service_fee').html("&#x20B9; " + fee);
+    $('#guests_booking').html(guests);
     $('#total_amount').html("&#x20B9; " + total);
   }
+
+  $('#booking_request_guests').change(function() {
+    var startDate = $('#from_booking').datepicker('getDate');
+    var endDate = $('#to_booking').datepicker('getDate');
+    if (startDate && endDate) {
+      update_amounts(startDate, endDate);
+    }
+  })
 
 });

@@ -12,5 +12,5 @@ class BookingRequest < ActiveRecord::Base
 	validates :amount, presence: true
 	validates :guest_id, presence: true
 
-  	attr_accessible :space_id, :host_id, :start_date, :end_date, :amount, :fees, :rent, :description
+  	attr_accessible :space_id, :host_id, :start_date, :end_date, :amount, :fees, :rent, :description, :guests
 end

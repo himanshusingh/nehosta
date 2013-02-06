@@ -145,7 +145,9 @@
 			  <%= f.text_field :end_date, placeholder: 'Check out yyyy-mm-dd', class: 'span3', id: 'to_booking', style: "z-index: 10510" %>
 			</div>
 			<br/>
-			<p class="text-info">Price: <strong>&#x20B9; <%= @space.price %></strong> <small>per night</small></p>
+			<%= f.label :guests, "Number of guests" %>
+			<%= f.select :guests, options_for_select((1..15))%>
+			<p class="text-info">Price: <strong>&#x20B9; <%= @space.price %></strong> per night <small>inclusive of host fee, nehosta service fee and applicable taxes.</small></p>
 
 			<%= f.label :description, 'Description(Optional)' %>
 			<%= f.text_area :description, placeholder: 'Share with your potential hosts your plans. Add description specific to your trip to Allahabad.', class: 'span6', rows: '6' %>
@@ -157,16 +159,12 @@
 					<td id="days_booking">0</td>
 				</tr>
 				<tr>
-					<td>Subtotal</td>
-					<td id="subtotal" data-price= "<%=@space.price%>">&#x20B9; 0</td>
-				</tr>
-				<tr>
-					<td>Nehosta service fee <small>(9.67%) + 100</small></td>
-					<td id="service_fee">&#x20B9; 0</td>
+					<td>Number of guests</td>
+					<td id="guests_booking">1</td>
 				</tr>
 				<tr>
 					<td>Total</td>
-					<td id="total_amount">&#x20B9; 0</td>
+					<td id="total_amount" data-price= "<%=@space.price%>" data-type= "<%=@space.room_type%>">&#x20B9; 0</td>
 				</tr>
 			</table>
 		  <%= f.submit "Create Booking Request", class: "btn btn-custom" %>

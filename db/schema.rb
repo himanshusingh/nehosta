@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130117114618) do
+ActiveRecord::Schema.define(:version => 20130204195045) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -31,8 +31,9 @@ ActiveRecord::Schema.define(:version => 20130117114618) do
     t.float    "fees"
     t.float    "rent"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "guests",      :default => 1
   end
 
   add_index "booking_requests", ["guest_id", "space_id"], :name => "index_booking_requests_on_guest_id_and_space_id", :unique => true
