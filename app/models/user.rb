@@ -28,6 +28,7 @@
 #  avatar_content_type    :string(255)
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  admin                  :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base

@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: bookings
+#
+#  id         :integer          not null, primary key
+#  space_id   :integer
+#  guest_id   :integer
+#  host_id    :integer
+#  start_date :date
+#  end_date   :date
+#  amount     :float
+#  fees       :float
+#  rent       :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Booking < ActiveRecord::Base
   	belongs_to :guest, class_name: 'User'
   	belongs_to :host, class_name: 'User'

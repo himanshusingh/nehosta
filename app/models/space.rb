@@ -22,6 +22,8 @@
 #  amenities      :string(255)
 #  size           :float
 #  directions     :text
+#  phone_number   :integer
+#  full_address   :text
 #
 
 class Space < ActiveRecord::Base

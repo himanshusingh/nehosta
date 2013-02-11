@@ -10,6 +10,7 @@
 #  picture_content_type :string(255)
 #  picture_file_size    :integer
 #  picture_updated_at   :datetime
+#  space_id             :integer
 #
 
 class Photo < ActiveRecord::Base
