@@ -20,6 +20,7 @@ Nehosta::Application.routes.draw do
   match '/contact', to: 'infos#contact'
   match '/faq', to: 'infos#faq'
   match '/howitworks', to: 'infos#howitworks'
+  match '/terms', to: 'infos#terms'
 
   resources :booking_requests
   resources :bookings

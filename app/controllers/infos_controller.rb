@@ -5,7 +5,7 @@ class InfosController < ApplicationController
 	def contact
 	end
 
-	def termsofservice
+	def terms
 	end
 
 	def privacy
