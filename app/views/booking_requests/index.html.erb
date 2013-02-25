@@ -12,6 +12,8 @@
 				<div class="spaceDetails">
 					<h4><%= link_to @guest.first_name, @guest%> want to stay in <%= link_to @space.name, @space%> from <%= request.start_date.strftime("%B %d, %Y") %> to <%=request.end_date.strftime("%B %d, %Y") %></h4>
 					<p class="spaceTypeAndLocation">from <%= request.start_date.strftime("%B %d, %Y") %> to <%=request.end_date.strftime("%B %d, %Y") %> </p>
+					<p> Number of guests: <%= request.guests %> </p>
+					<p> Total Amount: <%= request.amount %> </p>
 					<p>
 						<%= request.description %>
 					</p>
