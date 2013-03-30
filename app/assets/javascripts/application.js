@@ -38,7 +38,7 @@ $(document).ready(function() {
     $('#remove-space').hide();
   });
 
-  $('#from_booking').datepicker({ dateFormat: 'yy-mm-dd', defaultDate: "+1w", minDate: "+0D", maxDate: new Date(2013, 2, 28), onClose: function(selectedDate) {
+  $('#from_booking').datepicker({ dateFormat: 'yy-mm-dd', defaultDate: "+1w", minDate: "+0D", onClose: function(selectedDate) {
     var date = $('#from_booking').datepicker('getDate');
     if (date === null) return;
     date.setDate(date.getDate() + 1);
@@ -50,7 +50,7 @@ $(document).ready(function() {
     }
   }
   });
-  $('#to_booking').datepicker({ dateFormat: 'yy-mm-dd', defaultDate: "+1w", minDate: "+1D", maxDate: new Date(2013, 2, 28),  onClose: function(selectedDate) {
+  $('#to_booking').datepicker({ dateFormat: 'yy-mm-dd', defaultDate: "+1w", minDate: "+1D",  onClose: function(selectedDate) {
     var date = $('#to_booking').datepicker('getDate');
     if (date === null) return;
     date.setDate(date.getDate() - 1);

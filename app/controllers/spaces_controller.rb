@@ -7,10 +7,12 @@ class SpacesController < ApplicationController
 	end
 
 	def index
+		flash[:info] = "Kumbh is over. Bookings are now closed."
 		@spaces = Space.paginate(page: params[:page])
 	end
 
 	def show
+		flash[:info] = "Kumbh is over. Bookings are now closed."
 		@space = Space.find(params[:id])
 		@host = @space.user if @space
 	end

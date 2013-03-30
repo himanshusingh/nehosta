@@ -150,7 +150,7 @@
 			<p class="text-info">Price: <strong>&#x20B9; <%= @space.price %></strong> per night <small>inclusive of host fee, nehosta service fee and applicable taxes.</small></p>
 
 			<%= f.label :description, 'Description(Optional)' %>
-			<%= f.text_area :description, placeholder: 'Share with your potential hosts your plans. Add description specific to your trip to Allahabad.', class: 'span6', rows: '6' %>
+			<%= f.text_area :description, placeholder: 'Share with your potential hosts your plans. Add description specific to your trip to Allahabad.', class: 'span6', rows: '4' %>
 		</div>
 		<div class="modal-footer">
 			<table id="booking_amount" class="table table-condensed">
@@ -167,7 +167,8 @@
 					<td id="total_amount" data-price= "<%=@space.price%>" data-type= "<%=@space.room_type%>">&#x20B9; 0</td>
 				</tr>
 			</table>
-		  <%= f.submit "Create Booking Request", class: "btn btn-custom" %>
+		  <a href="#" class="btn btn-custom disabled">Create Booking Request</a>
+		
 		  <div class="btn" data-dismiss="modal">Cancel</div>
 		</div>
 		<% end %>
